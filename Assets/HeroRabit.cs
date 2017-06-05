@@ -5,13 +5,15 @@ using UnityEngine;
 public class HeroRabit : MonoBehaviour {
 
 	public float MaxJumpTime = 2f;
-    	public float JumpSpeed = 2f;
+    public float JumpSpeed = 2f;
 	public float speed = 1;
 	Rigidbody2D myBody = null;
 
-	 private bool _isGrounded = false;
+	private bool _isGrounded = false;
     private bool _jumpActive = false;
     private float _jumpTime = 0f;
+
+    Transform heroParent = null;
 	// Use this for initialization
 	void Start () {
 	     myBody = this.GetComponent<Rigidbody2D> ();
@@ -38,24 +40,33 @@ public class HeroRabit : MonoBehaviour {
 		} else if(value > 0) {
 			sr.flipX = false;
 		}
-		if (Mathf.Abs(value) > 0)
-        	{
-            		GetComponent<Animator>().SetBool("Run", true);
-       		}
-        	else
-        	{
-            		GetComponent<Animator>().SetBool("Run", false);
-               	}
+		if (Mathf.Abs(value) > 0){
+            GetComponent<Animator>().SetBool("Run", true);
+       	}else{
+            GetComponent<Animator>().SetBool("Run", false);
+        }
 
 		
 
-		 Vector3 from = transform.position + Vector3.up * 0.3f;
+		Vector3 from = transform.position + Vector3.up * 0.3f;
         Vector3 to = transform.position + Vector3.down * 0.1f;
         int layer_id = 1 << LayerMask.NameToLayer("Ground");
         //Перевіряємо чи проходить лінія через Collider з шаром Ground
         RaycastHit2D hit = Physics2D.Linecast(from, to, layer_id);
+        MovingPlatform movingPlatform = hit.transform.GetComponent<MovingPlatform > ();
         if (hit)
         {
+
+        	if(hit.transform != null && hit.transform.GetComponent<MovingPlatform>() != null){
+				//Приліпаємо до платформи
+				Debug.Log("I am here");
+				SetNewParent(this.transform, hit.transform);
+
+			} else {
+				//Ми в повітрі відліпаємо під платформи
+				Debug.Log("Tyt" + hit.transform.GetComponent<MovingPlatform>() + " wow");
+				SetNewParent(this.transform, this.heroParent);
+			}
             _isGrounded = true;
         }
         else
@@ -98,7 +109,23 @@ public class HeroRabit : MonoBehaviour {
             GetComponent<Animator>().SetBool("Jump", true);
         }
     }
+
+
+
+    static void SetNewParent(Transform obj, Transform new_parent) {
+		if(obj.transform.parent != new_parent) {
+		//Засікаємо позицію у Глобальних координатах
+			Vector3 pos = obj.transform.position;
+			//Встановлюємо нового батька
+			obj.transform.parent = new_parent;
+			//Після зміни батька координати кролика зміняться
+			//Оскільки вони тепер відносно іншого об’єкта
+			//повертаємо кролика в ті самі глобальні координати
+			obj.transform.position = pos;
+		}
 	}
+
+}
 
 
 
