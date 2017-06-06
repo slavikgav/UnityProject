@@ -7,7 +7,10 @@ public class HeroRabit : MonoBehaviour {
 	public float MaxJumpTime = 2f;
     public float JumpSpeed = 2f;
 	public float speed = 1;
+
 	Rigidbody2D myBody = null;
+
+    bool isSuperRabbit =  false;
 
 	private bool _isGrounded = false;
     private bool _jumpActive = false;
@@ -53,7 +56,7 @@ public class HeroRabit : MonoBehaviour {
         int layer_id = 1 << LayerMask.NameToLayer("Ground");
         //Перевіряємо чи проходить лінія через Collider з шаром Ground
         RaycastHit2D hit = Physics2D.Linecast(from, to, layer_id);
-        MovingPlatform movingPlatform = hit.transform.GetComponent<MovingPlatform > ();
+       
         if (hit)
         {
 
@@ -64,7 +67,7 @@ public class HeroRabit : MonoBehaviour {
 
 			} else {
 				//Ми в повітрі відліпаємо під платформи
-				Debug.Log("Tyt" + hit.transform.GetComponent<MovingPlatform>() + " wow");
+				//Debug.Log("Tytеееее" + hit.transform.name + " wow");
 				SetNewParent(this.transform, this.heroParent);
 			}
             _isGrounded = true;
@@ -122,6 +125,23 @@ public class HeroRabit : MonoBehaviour {
 			//Оскільки вони тепер відносно іншого об’єкта
 			//повертаємо кролика в ті самі глобальні координати
 			obj.transform.position = pos;
+		}
+	}
+
+	public void setSuperRabbitMode(){
+		if(!isSuperRabbit){
+			isSuperRabbit = true;
+			transform.localScale = new Vector3(1.4f, 1.4f, 0);
+		}
+	}
+
+	public void hitBomb(){
+		if(isSuperRabbit){
+			transform.localScale = new Vector3(1f, 1f, 0f);
+			isSuperRabbit = false;
+		}else{
+			//Die
+			Debug.Log("Ya ymer, ne ischi menya v kontakte");
 		}
 	}
 

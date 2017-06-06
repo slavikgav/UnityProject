@@ -7,8 +7,6 @@ public class MovingPlatform : MonoBehaviour {
 	Vector3 pointA;
 	Vector3 pointB;
 
-	MovingPlatform movingPlatform = new MovingPlatform();
-
 	public float speed;
 	public float pause;
 
