@@ -15,6 +15,9 @@ public class HeroRabit : MonoBehaviour {
 	private bool _isGrounded = false;
     private bool _jumpActive = false;
     private float _jumpTime = 0f;
+    private bool _isDead = false;
+
+    public static HeroRabit lastRabit;
 
     Transform heroParent = null;
 	// Use this for initialization
@@ -22,15 +25,23 @@ public class HeroRabit : MonoBehaviour {
 	     myBody = this.GetComponent<Rigidbody2D> ();
 	     LevelController.current.setStartPosition (transform.position);	
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    void Awake(){
+        lastRabit = this;
+    }
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 
 	// Update is called once per frame
 	void FixedUpdate () {
 	//[-1, 1]
+
+		if (_isDead)
+		return;
+
 		float value = Input.GetAxis ("Horizontal");
 		if (Mathf.Abs (value) > 0) {
 			Vector2 vel = myBody.velocity;
@@ -141,8 +152,27 @@ public class HeroRabit : MonoBehaviour {
 			isSuperRabbit = false;
 		}else{
 			//Die
-			Debug.Log("Ya ymer, ne ischi menya v kontakte");
+			StartCoroutine (die (2.0f));
+			//Debug.Log("Ya ymer, ne ischi menya v kontakte"); 
 		}
+	}
+
+	IEnumerator die (float duration){
+		Debug.Log("inside die func");
+		if(!_isDead){
+			Debug.Log("DIE CALLED");
+			GetComponent<Animator>().SetTrigger ("Die");
+			_isDead = true;
+			yield return new WaitForSeconds(duration);
+			LevelController.current.onRabitDeath(this);
+		    GetComponent<Animator>().SetTrigger ("Respawn");
+			_isDead = false;
+
+		}
+		Debug.Log("RESETTING TRIGGER DIE");
+		//GetComponent<Animator>().ResetTrigger ("Die");
+		
+		//addHealth (1);
 	}
 
 }
