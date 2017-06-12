@@ -147,15 +147,28 @@ public class HeroRabit : MonoBehaviour {
 	}
 
 	public void hitBomb(){
-		if(isSuperRabbit){
+		if(isSuperRabbit)
+        {
 			transform.localScale = new Vector3(1f, 1f, 0f);
 			isSuperRabbit = false;
 		}else{
 			//Die
 			StartCoroutine (die (2.0f));
-			//Debug.Log("Ya ymer, ne ischi menya v kontakte"); 
 		}
 	}
+
+    public void catchOrksHit() {
+        if (isSuperRabbit)
+        {
+            transform.localScale = new Vector3(1f, 1f, 0f);
+            isSuperRabbit = false;
+        }
+        else
+        {
+            //Die
+            StartCoroutine(die(2f));
+        }
+    }
 
 	IEnumerator die (float duration){
 		Debug.Log("inside die func");
@@ -174,6 +187,10 @@ public class HeroRabit : MonoBehaviour {
 		
 		//addHealth (1);
 	}
+
+    public bool isDead() {
+        return _isDead;
+    }
 
 }
 
