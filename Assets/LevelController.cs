@@ -35,15 +35,16 @@ public class LevelController : MonoBehaviour {
     public void addCoins(int n) {
         coins = coins + n;
         string temp = coins.ToString();
+        Debug.Log("INTO ADD COINS :"+temp);
         string label = "0000";
         if (temp.Length < 4)
         {
-            label = label.Substring(0, label.Length - temp.Length) + temp;
+            coinsLabel.text = label.Substring(0, label.Length - temp.Length) + temp;
         }
         else {
             coinsLabel.text = coins.ToString();
         }
-        coinsLabel.text = label;
+        
     }
 
     public void addApples(int n) {
