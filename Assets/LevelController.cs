@@ -5,7 +5,7 @@ using UnityEngine;
 public class LevelController : MonoBehaviour {
 	public static LevelController current;
 	Vector3 startingPosition;
-    int lives = 3;
+    
 
     public UILabel coinsLabel;
     public UILabel applesLabel;
@@ -26,7 +26,9 @@ public class LevelController : MonoBehaviour {
 		this.startingPosition = pos;
 	}
 	public void onRabitDeath(HeroRabit rabit) {
-		//При смерті кролика повертаємо на початкову позицію
+        //After death return rabit on start position
+        Debug.Log("STRT POS : " + startingPosition);
+        HeroRabit.lastRabit.removeHealth(1);
 		rabit.transform.position = this.startingPosition;
 	}
 
