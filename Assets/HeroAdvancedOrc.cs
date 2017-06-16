@@ -197,12 +197,13 @@ public class HeroAdvancedOrc : MonoBehaviour
 
     IEnumerator die(float duration)
     {
-        Debug.Log("inside die func");
+        Debug.Log("die triggered");
         mode = Mode.Die;
         GetComponent<Animator>().SetBool("Run", false);
         GetComponent<Animator>().SetBool("Die", true);
         //isDead = true;
         yield return new WaitForSeconds(duration);
+        Debug.Log("orc dies now");
         Destroy(this.gameObject);
     }
 
