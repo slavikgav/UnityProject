@@ -5,6 +5,7 @@ using UnityEngine;
 public class LevelController : MonoBehaviour {
 	public static LevelController current;
 	Vector3 startingPosition;
+    int lives = 3;
 
     public UILabel coinsLabel;
     public UILabel applesLabel;
@@ -13,8 +14,9 @@ public class LevelController : MonoBehaviour {
     int apples = 0;
     public int applesInLevel = 0;
 
+    public LivesPanel livesPanel;
 
-	void Awake() {
+    void Awake() {
 		current = this;
         coinsLabel.text = "0000";
         applesLabel.text = "0/" + applesInLevel;

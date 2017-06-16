@@ -11,6 +11,7 @@ public class HeroRabit : MonoBehaviour {
 	Rigidbody2D myBody = null;
 
     bool isSuperRabbit =  false;
+    int health = 3;
 
 	private bool _isGrounded = false;
     private bool _jumpActive = false;
@@ -22,8 +23,10 @@ public class HeroRabit : MonoBehaviour {
     Transform heroParent = null;
 	// Use this for initialization
 	void Start () {
-	     myBody = this.GetComponent<Rigidbody2D> ();
-	     LevelController.current.setStartPosition (transform.position);	
+	    myBody = this.GetComponent<Rigidbody2D> ();
+	    LevelController.current.setStartPosition (transform.position);
+        LivesPanel.current.setLivesQuantity(health);
+        Debug.Log("After setter");
 	}
 
     void Awake(){
@@ -152,8 +155,8 @@ public class HeroRabit : MonoBehaviour {
 			transform.localScale = new Vector3(1f, 1f, 0f);
 			isSuperRabbit = false;
 		}else{
-			//Die
-			StartCoroutine (die (2.0f));
+            //Remove health
+            removeHealth(1);
 		}
 	}
 
@@ -165,12 +168,34 @@ public class HeroRabit : MonoBehaviour {
         }
         else
         {
-            //Die
-            StartCoroutine(die(2f));
+            //Remove health
+            removeHealth(1);
         }
     }
 
-	IEnumerator die (float duration){
+    void onHealthChange()
+    {
+        if (this.health == 0)
+        {
+            int childCount = this.transform.childCount;
+            for (int i = 0; i < childCount; i++)
+                Destroy(this.transform.GetChild(i).gameObject);
+            StartCoroutine(die(2f));
+        }
+        LivesPanel.current.setLivesQuantity(this.health);
+    }
+
+    public void removeHealth(int number)
+    {
+        this.health -= number;
+        if (this.health < 0)
+        {
+            this.health = 0;
+        }
+        this.onHealthChange();
+    }
+
+    IEnumerator die (float duration){
 		Debug.Log("inside die func");
 		if(!_isDead){
 			Debug.Log("DIE CALLED");
