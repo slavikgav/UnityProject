@@ -136,7 +136,8 @@ public class HeroOrc : MonoBehaviour {
     }
 
     bool isRabitInPatrolZone() {
-        return ((HeroRabit.lastRabit.transform.position.x >= pointA.x)&&(HeroRabit.lastRabit.transform.position.x <= pointB.x));
+        return ((HeroRabit.lastRabit.transform.position.x >= pointA.x)&&(HeroRabit.lastRabit.transform.position.x <= pointB.x) 
+                 && Mathf.Abs(HeroRabit.lastRabit.transform.position.y - this.transform.position.y) <= 0.2);
     }
 
     public void attack() {

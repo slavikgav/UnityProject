@@ -11,7 +11,7 @@ public class OrcAttackController : MonoBehaviour {
       //  Debug.Log("CAN BE ATTACKED :  " + (HeroRabit.lastRabit.transform.position.y > orc.transform.position.y + 0.5));
         if (!HeroRabit.lastRabit.isDead() && HeroRabit.lastRabit != null
             && Mathf.Abs(HeroRabit.lastRabit.transform.position.x - orc.transform.position.x) < 1.9
-            && !(HeroRabit.lastRabit.transform.position.y > orc.transform.position.y + 0.5))
+            && Mathf.Abs(HeroRabit.lastRabit.transform.position.y - orc.transform.position.y) <= 0.2)
         {
             orc.attack();
             HeroRabit.lastRabit.catchOrksHit();
