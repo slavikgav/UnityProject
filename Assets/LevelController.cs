@@ -18,8 +18,11 @@ public class LevelController : MonoBehaviour {
 
     void Awake() {
 		current = this;
-        coinsLabel.text = "0000";
-        applesLabel.text = "0/" + applesInLevel;
+        if (coinsLabel != null && applesLabel != null)
+        {
+            coinsLabel.text = "0000";
+            applesLabel.text = "0/" + applesInLevel;
+        }
 	}
 
 	public void setStartPosition(Vector3 pos) {

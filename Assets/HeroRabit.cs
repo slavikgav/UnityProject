@@ -25,7 +25,8 @@ public class HeroRabit : MonoBehaviour {
 	void Start () {
 	    myBody = this.GetComponent<Rigidbody2D> ();
 	    LevelController.current.setStartPosition (transform.position);
-        LivesPanel.current.setLivesQuantity(health);
+        if(LivesPanel.current != null)
+            LivesPanel.current.setLivesQuantity(health);
         Debug.Log("After setter");
 	}
 
