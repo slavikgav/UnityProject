@@ -17,8 +17,17 @@ public class HeroRabit : MonoBehaviour {
     private bool _jumpActive = false;
     private float _jumpTime = 0f;
     private bool _isDead = false;
+    private bool _isRunning = false;
 
     public static HeroRabit lastRabit;
+
+    public AudioClip runMusic = null;
+    AudioSource runSource = null;
+    public AudioClip jumpMusic = null;
+    AudioSource jumpSource = null;
+    public AudioClip dieMusic = null;
+    AudioSource dieSource = null;
+
 
     Transform heroParent = null;
 	// Use this for initialization
@@ -28,7 +37,15 @@ public class HeroRabit : MonoBehaviour {
         if(LivesPanel.current != null)
             LivesPanel.current.setLivesQuantity(health);
         Debug.Log("After setter");
-	}
+        runSource = gameObject.AddComponent<AudioSource>();
+        runSource.clip = runMusic;
+        runSource.loop = true;
+        jumpSource = gameObject.AddComponent<AudioSource>();
+        jumpSource.clip = jumpMusic;
+        dieSource = gameObject.AddComponent<AudioSource>();
+        dieSource.clip = dieMusic;
+
+    }
 
     void Awake(){
         lastRabit = this;
@@ -60,8 +77,14 @@ public class HeroRabit : MonoBehaviour {
 		}
 		if (Mathf.Abs(value) > 0){
             GetComponent<Animator>().SetBool("Run", true);
-       	}else{
+            _isRunning = true;
+            
+            
+        }
+        else{
             GetComponent<Animator>().SetBool("Run", false);
+            _isRunning = false;
+            runSource.Play();
         }
 
 		
@@ -121,10 +144,13 @@ public class HeroRabit : MonoBehaviour {
         if (this._isGrounded)
         {
             GetComponent<Animator>().SetBool("Jump", false);
+            jumpSource.Play();
+
         }
         else
         {
             GetComponent<Animator>().SetBool("Jump", true);
+           
         }
     }
 
@@ -199,6 +225,7 @@ public class HeroRabit : MonoBehaviour {
     IEnumerator die (float duration){
 		Debug.Log("inside die func");
 		if(!_isDead){
+            dieSource.Play();
 			Debug.Log("DIE CALLED");
 			GetComponent<Animator>().SetTrigger ("Die");
 			_isDead = true;

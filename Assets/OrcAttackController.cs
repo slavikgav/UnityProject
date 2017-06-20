@@ -19,8 +19,7 @@ public class OrcAttackController : MonoBehaviour {
         else if (!HeroRabit.lastRabit.isDead() && HeroRabit.lastRabit != null
             && Mathf.Abs(HeroRabit.lastRabit.transform.position.x - orc.transform.position.x) > 1.7)
         {
-            orc.GetComponent<Animator>().SetBool("Attack", false);
-            orc.GetComponent<Animator>().SetBool("Run", true);
+            orc.walk();
         }
         else if (!HeroRabit.lastRabit.isDead() && HeroRabit.lastRabit != null
             && HeroRabit.lastRabit.transform.position.y > orc.transform.position.y + 0.5)

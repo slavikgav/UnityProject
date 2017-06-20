@@ -17,6 +17,10 @@ public class HeroAdvancedOrc : MonoBehaviour
     float carrotDelay = 3;
     float startedCarrot = 0;
 
+    public AudioClip attackMusic = null;
+    AudioSource attackSource = null;
+    bool playPressed = false;
+
     public enum Mode
     {
         goToA,
@@ -42,6 +46,11 @@ public class HeroAdvancedOrc : MonoBehaviour
             pointB.x += patrolDistance;
         }
         orcBody = this.GetComponent<Rigidbody2D>();
+        attackSource = gameObject.AddComponent<AudioSource>();
+        attackSource.clip = attackMusic;
+        attackSource.loop = true;
+        attackSource.Play();
+        attackSource.Pause();
     }
 
     // Update is called once per frame
@@ -100,7 +109,14 @@ public class HeroAdvancedOrc : MonoBehaviour
         Vector3 rabit_pos = HeroRabit.lastRabit.transform.position;
 
         if (mode == Mode.Attack)
+        {
+            if (!playPressed)
+            {
+                attackSource.UnPause();
+                playPressed = true;
+            }
             launchCarrot();
+        }
 
         if (isRabitInPatrolZone())
         {
@@ -110,6 +126,8 @@ public class HeroAdvancedOrc : MonoBehaviour
         }
         if (mode == Mode.goToB)
         {
+            attackSource.Pause();
+            playPressed = false;
             if (Mathf.Abs(my_pos.x - rabit_pos.x) > patrolDistance)
                 GetComponent<Animator>().SetBool("Attack", false);
             //  Debug.Log("go to B");
@@ -122,6 +140,8 @@ public class HeroAdvancedOrc : MonoBehaviour
         }
         else if (mode == Mode.goToA)
         {
+            attackSource.Pause();
+            playPressed = false;
             if (Mathf.Abs(my_pos.x - rabit_pos.x) > patrolDistance)
                 GetComponent<Animator>().SetBool("Attack", false);
             //   Debug.Log("go to A");

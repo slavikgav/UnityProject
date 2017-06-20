@@ -12,6 +12,9 @@ public class HeroOrc : MonoBehaviour {
 
     float patrolDistance = 4;
     int health = 1;
+    public AudioClip attackMusic = null;
+    AudioSource attackSource = null;
+    bool playPressed = false;
 
     public enum Mode {
         goToA,
@@ -35,6 +38,12 @@ public class HeroOrc : MonoBehaviour {
             pointB.x += patrolDistance;
         }
         orcBody = this.GetComponent<Rigidbody2D>();
+        attackSource = gameObject.AddComponent<AudioSource>();
+        attackSource.clip = attackMusic;
+        attackSource.loop = true;
+        attackSource.Play();
+        attackSource.Pause();
+
     }
 
     // Update is called once per frame
@@ -84,14 +93,22 @@ public class HeroOrc : MonoBehaviour {
 
     float getDirection() {
         if (mode == Mode.Die) {
+            attackSource.Pause();
             return 0; //Die
         }
 
         Vector3 my_pos = this.transform.position;
         Vector3 rabit_pos = HeroRabit.lastRabit.transform.position;
 
-        if (mode == Mode.Attack)
+        if (mode == Mode.Attack) {
+            if (!playPressed)
+            {
+                attackSource.UnPause();
+                playPressed = true;
+            }
             return DirectionToRabbit();
+        }
+            
 
         if (isRabitInPatrolZone())
         {
@@ -100,6 +117,8 @@ public class HeroOrc : MonoBehaviour {
         }
         if (mode == Mode.goToB)
         {
+            attackSource.Pause();
+            playPressed = false;
             if (Mathf.Abs(my_pos.x - rabit_pos.x) > 1.5)
                 GetComponent<Animator>().SetBool("Attack",false);
           //  Debug.Log("go to B");
@@ -112,6 +131,8 @@ public class HeroOrc : MonoBehaviour {
         }
         else if (mode == Mode.goToA)
         {
+            attackSource.Pause();
+            playPressed = false;
             if (Mathf.Abs(my_pos.x - rabit_pos.x) > 1.5)
                 GetComponent<Animator>().SetBool("Attack", false);
             //   Debug.Log("go to A");
@@ -178,4 +199,10 @@ public class HeroOrc : MonoBehaviour {
     public bool isDead() {
         return health == 0; 
     }
+
+    public void walk() {
+        this.GetComponent<Animator>().SetBool("Attack", false);
+        this.GetComponent<Animator>().SetBool("Run", true);
+    }
+
 }

@@ -55,7 +55,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1260274418839412}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.69, y: 1.51, z: 0}
+  m_LocalPosition: {x: -1.52, y: 0.16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4571549635260008}
@@ -188,6 +188,7 @@ MonoBehaviour:
   speed: 2
   pointA: {x: 0, y: 0, z: 0}
   pointB: {x: 0, y: 0, z: 0}
+  attackMusic: {fileID: 8300000, guid: ece9b14a232f14f48ab9a5e844cb5daf, type: 3}
 --- !u!212 &212992367982452028
 SpriteRenderer:
   m_ObjectHideFlags: 1

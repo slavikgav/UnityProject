@@ -15,6 +15,8 @@ public class LevelController : MonoBehaviour {
     public int applesInLevel = 0;
 
     public LivesPanel livesPanel;
+    public AudioClip backgroundMusic = null;
+    AudioSource musicSource = null;
 
     void Awake() {
 		current = this;
@@ -24,6 +26,9 @@ public class LevelController : MonoBehaviour {
             coinsLabel.text = "0000";
             applesLabel.text = "0/" + applesInLevel;
         }
+        musicSource = gameObject.AddComponent<AudioSource>();
+        musicSource.clip = backgroundMusic;
+        musicSource.Play();
 	}
 
 	public void setStartPosition(Vector3 pos) {
