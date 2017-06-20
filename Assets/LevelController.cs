@@ -18,6 +18,7 @@ public class LevelController : MonoBehaviour {
 
     void Awake() {
 		current = this;
+        this.coins = PlayerPrefs.GetInt("coins", 0);
         if (coinsLabel != null && applesLabel != null)
         {
             coinsLabel.text = "0000";

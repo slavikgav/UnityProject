@@ -14,7 +14,7 @@ public class DoorLevel2 : MonoBehaviour
         if (rabit != null)
         {
             Debug.Log("LOAD SECOND SCENE, success");
-            //SceneManager.LoadScene("Level2");
+            SceneManager.LoadScene("Level2");
         }
     }
 }

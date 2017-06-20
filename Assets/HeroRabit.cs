@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class HeroRabit : MonoBehaviour {
 
-	public float MaxJumpTime = 2f;
-    public float JumpSpeed = 2f;
-	public float speed = 1;
+	public float MaxJumpTime = 1f;
+    public float JumpSpeed = 4f;
+	public float speed = 2;
 
 	Rigidbody2D myBody = null;
 
