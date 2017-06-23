@@ -20,6 +20,7 @@ public class HeroRabit : MonoBehaviour {
     private bool _isRunning = false;
 
     public static HeroRabit lastRabit;
+    public static bool soundOff = false;
 
     public AudioClip runMusic = null;
     AudioSource runSource = null;
@@ -84,7 +85,8 @@ public class HeroRabit : MonoBehaviour {
         else{
             GetComponent<Animator>().SetBool("Run", false);
             _isRunning = false;
-            runSource.Play();
+            if(!soundOff)
+                runSource.Play();
         }
 
 		
@@ -114,7 +116,6 @@ public class HeroRabit : MonoBehaviour {
         {
             _isGrounded = false;
         }
-        //Намалювати лінію (для розробника)
         Debug.DrawLine(from, to, Color.red);
 
         if (Input.GetButtonDown("Jump") && _isGrounded)
@@ -144,7 +145,8 @@ public class HeroRabit : MonoBehaviour {
         if (this._isGrounded)
         {
             GetComponent<Animator>().SetBool("Jump", false);
-            jumpSource.Play();
+            if(!soundOff)
+                jumpSource.Play();
 
         }
         else
@@ -225,7 +227,8 @@ public class HeroRabit : MonoBehaviour {
     IEnumerator die (float duration){
 		Debug.Log("inside die func");
 		if(!_isDead){
-            dieSource.Play();
+            if(!soundOff)
+                dieSource.Play();
 			Debug.Log("DIE CALLED");
 			GetComponent<Animator>().SetTrigger ("Die");
 			_isDead = true;

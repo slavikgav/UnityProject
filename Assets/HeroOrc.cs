@@ -15,6 +15,7 @@ public class HeroOrc : MonoBehaviour {
     public AudioClip attackMusic = null;
     AudioSource attackSource = null;
     bool playPressed = false;
+    public static bool soundOff = false;
 
     public enum Mode {
         goToA,
@@ -101,20 +102,20 @@ public class HeroOrc : MonoBehaviour {
         Vector3 rabit_pos = HeroRabit.lastRabit.transform.position;
 
         if (mode == Mode.Attack) {
-            if (!playPressed)
+            if (!playPressed && !soundOff)
             {
                 attackSource.UnPause();
                 playPressed = true;
             }
             return DirectionToRabbit();
         }
-            
 
         if (isRabitInPatrolZone())
         {
             mode = Mode.Attack;
             return DirectionToRabbit();
         }
+
         if (mode == Mode.goToB)
         {
             attackSource.Pause();

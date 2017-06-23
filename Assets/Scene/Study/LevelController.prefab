@@ -55,3 +55,4 @@ MonoBehaviour:
   applesLabel: {fileID: 0}
   applesInLevel: 12
   livesPanel: {fileID: 0}
+  backgroundMusic: {fileID: 8300000, guid: 57a5b2120c2d04fa9bcb5b2e99ee9361, type: 3}

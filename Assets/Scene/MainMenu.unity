@@ -907,7 +907,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4800609251404606, guid: 3833ed70002194e13ba36de8f09f30d3, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.34
+      value: 0.301
       objectReference: {fileID: 0}
     - target: {fileID: 4800609251404606, guid: 3833ed70002194e13ba36de8f09f30d3, type: 2}
       propertyPath: m_LocalPosition.z
@@ -933,7 +933,15 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 114402623683798934, guid: 3833ed70002194e13ba36de8f09f30d3,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114402623683798934, guid: 3833ed70002194e13ba36de8f09f30d3, type: 2}
+    - {fileID: 50379621308583782, guid: 3833ed70002194e13ba36de8f09f30d3, type: 2}
+    - {fileID: 61195609760463112, guid: 3833ed70002194e13ba36de8f09f30d3, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 3833ed70002194e13ba36de8f09f30d3, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &853937434
@@ -1144,14 +1152,14 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 812
+  mWidth: 815
   mHeight: 72
   mDepth: 0
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 11.277778
+  aspectRatio: 11.319445
   mType: 0
   mFillDirection: 4
   mFillAmount: 1

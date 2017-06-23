@@ -10,7 +10,7 @@ public class AdvancedOrcAttackController : MonoBehaviour
     {
         if (!HeroRabit.lastRabit.isDead() && HeroRabit.lastRabit != null
             && HeroRabit.lastRabit.transform.position.y > orc.transform.position.y + 0.5
-            && Mathf.Abs(HeroRabit.lastRabit.transform.position.y - orc.transform.position.y) <= 0.2)
+            && Mathf.Abs(HeroRabit.lastRabit.transform.position.x - orc.transform.position.x) < 1.9)
         {
             Debug.Log("Die");
             orc.removeHealth(1);

@@ -16,7 +16,7 @@ public class LevelController : MonoBehaviour {
 
     public LivesPanel livesPanel;
     public AudioClip backgroundMusic = null;
-    AudioSource musicSource = null;
+    public static AudioSource musicSource = null;
 
     void Awake() {
 		current = this;

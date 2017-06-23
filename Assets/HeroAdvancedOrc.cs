@@ -11,7 +11,7 @@ public class HeroAdvancedOrc : MonoBehaviour
     public Vector3 pointA;
     public Vector3 pointB;
 
-    float patrolDistance = 6;
+    float patrolDistance = 4;
     int health = 1;
 
     float carrotDelay = 3;
@@ -20,6 +20,8 @@ public class HeroAdvancedOrc : MonoBehaviour
     public AudioClip attackMusic = null;
     AudioSource attackSource = null;
     bool playPressed = false;
+    public static bool soundOff = false;
+
 
     public enum Mode
     {
@@ -56,6 +58,9 @@ public class HeroAdvancedOrc : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+
+        if (isDead())
+            return;
         Debug.Log("Mode : " + mode);
         float value = this.getDirection();
 
@@ -110,7 +115,7 @@ public class HeroAdvancedOrc : MonoBehaviour
 
         if (mode == Mode.Attack)
         {
-            if (!playPressed)
+            if (!playPressed && !soundOff)
             {
                 attackSource.UnPause();
                 playPressed = true;
