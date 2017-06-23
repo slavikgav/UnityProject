@@ -10,7 +10,7 @@ public class DoorLevel2 : MonoBehaviour
     {
         //if(!this.hideAnimation) {
         HeroRabit rabit = collider.GetComponent<HeroRabit>();
-        Debug.Log("Here DOOR LEVEL 1");
+        Debug.Log("Here DOOR LEVEL 2");
         if (rabit != null)
         {
             Debug.Log("LOAD SECOND SCENE, success");

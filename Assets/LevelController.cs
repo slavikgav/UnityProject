@@ -9,10 +9,11 @@ public class LevelController : MonoBehaviour {
 
     public UILabel coinsLabel;
     public UILabel applesLabel;
+
     
-    int coins = 0;
-    int apples = 0;
-    public int applesInLevel = 0;
+    public static int coins = 0;
+    public static int apples = 0;
+    public static int applesInLevel = 1;
 
     public LivesPanel livesPanel;
     public AudioClip backgroundMusic = null;
@@ -20,7 +21,6 @@ public class LevelController : MonoBehaviour {
 
     void Awake() {
 		current = this;
-        this.coins = PlayerPrefs.GetInt("coins", 0);
         if (coinsLabel != null && applesLabel != null)
         {
             coinsLabel.text = "0000";

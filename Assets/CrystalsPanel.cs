@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class CrystalsPanel : MonoBehaviour {
     public static CrystalsPanel current = null;
@@ -8,7 +9,7 @@ public class CrystalsPanel : MonoBehaviour {
 
     public Sprite crystalNotGet;
     public List<Sprite> crystalColors;
-    Dictionary<CrystalColor,bool> obtainedCrystals = new Dictionary<CrystalColor, bool>();
+    public static Dictionary<CrystalColor,bool> obtainedCrystals = new Dictionary<CrystalColor, bool>();
     
     // Use this for initialization
     void Start () {
@@ -33,5 +34,19 @@ public class CrystalsPanel : MonoBehaviour {
         Debug.Log("add crystal");
         obtainedCrystals[color] = true;
         this.updateCrystalColor(color);
+    }
+
+    public void showObtainedCrystals() {
+        int crystal_id = 0;
+        for (int i = 0; i < 3; i++) {
+            crystal_id = (int)obtainedCrystals.Keys.ToList()[i];
+            if (obtainedCrystals[obtainedCrystals.Keys.ToList()[i]])
+            {
+                crystalPlace[crystal_id].sprite2D = crystalColors[crystal_id];
+            }
+            else {
+                crystalPlace[crystal_id].sprite2D = crystalNotGet;
+            }
+        }
     }
 }

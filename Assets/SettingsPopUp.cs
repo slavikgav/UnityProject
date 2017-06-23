@@ -59,7 +59,7 @@ public class SettingsPopUp : MonoBehaviour {
     void soundManager() {
         if (_soundOn)
         {
-            Debug.Log("HERRE MUSiC OFF");
+            Debug.Log("HERRE SOUND OFF");
             soundButton.GetComponent<UI2DSprite>().sprite2D = soundOff;
             soundButton.GetComponent<UIButton>().normalSprite2D = soundOff;
             HeroRabit.soundOff = true;
@@ -69,7 +69,7 @@ public class SettingsPopUp : MonoBehaviour {
         }
         else
         {
-            Debug.Log("HERE MUSIC ON");
+            Debug.Log("HERE Sound ON");
             soundButton.GetComponent<UI2DSprite>().sprite2D = soundOn;
             soundButton.GetComponent<UIButton>().normalSprite2D = soundOn;
             HeroRabit.soundOff = false;
