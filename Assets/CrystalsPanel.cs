@@ -36,17 +36,4 @@ public class CrystalsPanel : MonoBehaviour {
         this.updateCrystalColor(color);
     }
 
-    public void showObtainedCrystals() {
-        int crystal_id = 0;
-        for (int i = 0; i < 3; i++) {
-            crystal_id = (int)obtainedCrystals.Keys.ToList()[i];
-            if (obtainedCrystals[obtainedCrystals.Keys.ToList()[i]])
-            {
-                crystalPlace[crystal_id].sprite2D = crystalColors[crystal_id];
-            }
-            else {
-                crystalPlace[crystal_id].sprite2D = crystalNotGet;
-            }
-        }
-    }
 }

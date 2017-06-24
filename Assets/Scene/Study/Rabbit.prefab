@@ -123,6 +123,8 @@ MonoBehaviour:
   runMusic: {fileID: 8300000, guid: 0d024189a711c440997b2d9f341c8dd0, type: 3}
   jumpMusic: {fileID: 8300000, guid: 4678dc960a2b949329a55d696cf4ec68, type: 3}
   dieMusic: {fileID: 8300000, guid: 7553580dee44e4f96b2efa5f4e5e17c3, type: 3}
+  losePopUpPrefab: {fileID: 1852891584728176, guid: 3172fb7efba8fac4cb4dbaa568ae0548,
+    type: 2}
 --- !u!212 &212184264830879528
 SpriteRenderer:
   m_ObjectHideFlags: 1

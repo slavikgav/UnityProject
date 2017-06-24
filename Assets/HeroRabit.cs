@@ -29,6 +29,7 @@ public class HeroRabit : MonoBehaviour {
     public AudioClip dieMusic = null;
     AudioSource dieSource = null;
 
+    public GameObject losePopUpPrefab;
 
     Transform heroParent = null;
 	// Use this for initialization
@@ -236,6 +237,7 @@ public class HeroRabit : MonoBehaviour {
 			LevelController.current.onRabitDeath(this);
 		    GetComponent<Animator>().SetTrigger ("Respawn");
 			_isDead = false;
+            showLosePopUp();
 
 		}
 		Debug.Log("RESETTING TRIGGER DIE");
@@ -246,6 +248,16 @@ public class HeroRabit : MonoBehaviour {
 
     public bool isDead() {
         return _isDead;
+    }
+
+    void showLosePopUp()
+    {
+        //Do something
+        GameObject parent = UICamera.first.transform.parent.gameObject;
+        Debug.Log("PARENT NAME: " + parent.name);
+        //Prefab
+        GameObject obj = NGUITools.AddChild(parent, losePopUpPrefab);
+        LosePopUp popup = obj.GetComponent<LosePopUp>();
     }
 
 }
