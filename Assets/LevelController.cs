@@ -13,7 +13,7 @@ public class LevelController : MonoBehaviour {
     
     public static int coins = 0;
     public static int apples = 0;
-    public static int applesInLevel = 1;
+    public static int applesInLevel = 10;
 
     public LivesPanel livesPanel;
     public AudioClip backgroundMusic = null;
@@ -28,6 +28,7 @@ public class LevelController : MonoBehaviour {
         }
         musicSource = gameObject.AddComponent<AudioSource>();
         musicSource.clip = backgroundMusic;
+        musicSource.loop = true;
         musicSource.Play();
 	}
 
@@ -39,6 +40,7 @@ public class LevelController : MonoBehaviour {
         Debug.Log("STRT POS : " + startingPosition);
         HeroRabit.lastRabit.removeHealth(1);
 		rabit.transform.position = this.startingPosition;
+        
 	}
 
     public void addCoins(int n) {
